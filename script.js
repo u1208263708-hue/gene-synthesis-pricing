@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cells = rows[i];
         const tr = document.createElement('tr');
 
-        // Find cheapest price in columns 1–8 (Twist to Thermo GeneArt)
+        // Find cheapest price (columns 1–8)
         const priceValues = cells.slice(1, 9).map(cell => {
           const match = cell.match(/0?\.(\d+)/);
           return match ? parseFloat('0.' + match[1]) : Infinity;
@@ -22,23 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const td = document.createElement('td');
 
           if (idx >= 1 && idx <= 8) {
-            // Price columns – highlight cheapest
             td.textContent = cell || '—';
             const match = cell.match(/0?\.(\d+)/);
             const num = match ? parseFloat('0.' + match[1]) : Infinity;
-            if (num === minPrice && num !== Infinity) {
-              td.classList.add('cheapest');
-            }
+            if (num === minPrice && num !== Infinity) td.classList.add('cheapest');
           }
-          else if (idx === 13) {
-            // Last column = Action button (individual per row)
+          else if (idx === 13) { // Action column
             td.innerHTML = `<a href="https://www.twistbioscience.com/order?ref=yourid" target="_blank">
-              <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium py-2 px-3 rounded whitespace-nowrap">
-                Get Quote →
-              </button></a>`;
+              <button>Get Quote →</button></a>`;
           }
           else {
-            // All other columns (Length, Turnaround, Codon Opt, etc.)
             td.textContent = cell || '—';
           }
           tr.appendChild(td);
@@ -46,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.appendChild(tr);
       }
 
-      // Enable sorting on first 13 columns (everything except Action)
+      // Sorting (all columns except Action)
       document.querySelectorAll('th').forEach((th, col) => {
         if (col < 13) th.addEventListener('click', () => sortTable(col));
       });
