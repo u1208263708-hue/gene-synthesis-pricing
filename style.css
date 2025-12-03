@@ -1,45 +1,45 @@
 /* ──────────────────────────────── */
-/*  FINAL: BIG TEXT + NO LINE WRAP */
+/*  FINAL: BIG TEXT + NO WRAPPING  */
 /* ──────────────────────────────── */
 
 #priceTable {
     width: 100%;
-    table-layout: fixed;           /* forces columns to respect width */
+    table-layout: fixed;                 /* forces equal column distribution */
 }
 
 #priceTable th,
 #priceTable td {
-    white-space: nowrap;           /* ←←← THIS is the magic line */
+    white-space: nowrap !important;      /* ←←← THIS stops every wrap */
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1rem;               /* ←←← back to original 16px size */
-    padding: 14px 8px;             /* generous padding, looks premium */
+    font-size: 1.05rem !important;       /* ←←← BIGGER than original (≈17px) */
+    padding: 16px 10px !important;      /* generous padding so it feels premium */
     text-align: center;
 }
 
-/* Give the three longest columns a tiny bit more width */
+/* Slightly wider columns for the longest text (IDT, Thermo, Action) */
 #priceTable th:nth-child(3),   /* IDT */
 #priceTable td:nth-child(3),
 #priceTable th:nth-child(9),   /* Thermo GeneArt */
 #priceTable td:nth-child(9),
-#priceTable th:nth-child(10),  /* Action column */
+#priceTable th:nth-child(10),  /* Action */
 #priceTable td:nth-child(10) {
-    width: 14%;                    /* slightly wider for long text/buttons */
+    width: 15%;
 }
 
-/* Make sure the table container scrolls horizontally on small screens */
+/* Horizontal scroll on small screens */
 .overflow-x-auto {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Button stays crisp */
+/* Buttons */
 button {
-    font-size: 0.9rem;
-    padding: 10px 14px;
+    font-size: 1rem !important;
+    padding: 10px 16px !important;
     white-space: nowrap;
 }
 
-/* Cheapest price highlight */
+/* Cheapest highlight */
 .cheapest {
     background-color: #d4edda !important;
     font-weight: bold;
