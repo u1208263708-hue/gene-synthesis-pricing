@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           // Action column (Last column: cells.length - 1)
           else if (idx === cells.length - 1) {
-            td.innerHTML = `<a href="${url}" target="_blank"><button>Get Quote from ${winner} →</button></a>`;
+            td.innerHTML = `<a href="${url}" target="_blank"><button>Get Quote from ${winner}</button></a>`;
           }
           // All other columns (Notes included)
           else {
