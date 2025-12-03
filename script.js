@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(text => {
       const rows = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/^"|"$/g, '')));
       const header = rows[0];
-
       const companies = ["Twist Bioscience","IDT","GenScript","Eurofins","Azenta","Synbio Tech","Biomatik","Thermo GeneArt"];
-      const colIdx = companies.map(name => header.indexOf(name));
+      const colIdx = companies.map(n => header.indexOf(n));
 
       const links = {
         "Twist Bioscience":"https://www.twistbioscience.com/order?ref=yourid",
@@ -26,13 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const tr = document.createElement('tr');
 
         const prices = colIdx.map(idx => {
-          const val = cells[idx] || '';
-          const m = val.match(/0?\.(\d+)/);
+          const m = (cells[idx] || '').match(/0?\.(\d+)/);
           return m ? parseFloat('0.' + m[1]) : Infinity;
         });
         const minP = Math.min(...prices);
         const winner = companies[prices.indexOf(minP)];
-        const winnerURL = links[winner];
+        const url = links[winner];
 
         cells.forEach((cell, idx) => {
           const td = document.createElement('td');
@@ -40,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
             td.textContent = cell || '—';
             if (parseFloat('0.' + (cell.match(/0?\.(\d+)/)||[])[1]) === minP) td.classList.add('cheapest');
           }
-          else if (idx === cells.length - 1) { // Action column
-            td.innerHTML = `<a href="${winnerURL}" target="_blank"><button>Get Quote from ${winner} →</button></a>`;
+          else if (idx === cells.length - 1) {
+            td.innerHTML = `<a href="${url}" target="_blank"><button>Get Quote from ${winner} →</button></a>`;
           }
           else {
             td.textContent = cell || '—';
@@ -51,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.appendChild(tr);
       }
 
-      // Sorting
       document.querySelectorAll('th').forEach((th, col) => {
         if (col < header.length - 1) th.addEventListener('click', () => sortTable(col));
       });
@@ -67,7 +64,7 @@ function sortTable(col) {
     for (let i = 0; i < rows.length - 1; i++) {
       const a = rows[i].cells[col].innerText.trim();
       const b = rows[i + 1].cells[col].innerText.trim();
-      if (a.localeCompare(b, undefined, {numeric: true}) > 0) {
+      if (a.localeCompare(b, undefined, {numeric:true}) > 0) {
         rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
         switching = true;
       }
