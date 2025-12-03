@@ -43,4 +43,49 @@ document.addEventListener('DOMContentLoaded', () => {
             const links = {
               "Twist": "https://www.twistbioscience.com/order?ref=yourid",
               "IDT": "https://www.idtdna.com/pages/products/genes/fragments",
-              "GenScript": "https://www.gens
+              "GenScript": "https://www.genscript.com/order.html",
+              "Eurofins": "https://eurofinsgenomics.com/en/products/gene-synthesis/",
+              "Azenta": "https://www.azenta.com/gene-synthesis",
+              "Synbio Tech": "https://www.synbio-tech.com/order",
+              "Biomatik": "https://www.biomatik.com/order",
+              "Thermo GeneArt": "https://www.thermofisher.com/geneart"
+            };
+            const url = links[company] || "#";
+            td.innerHTML = `<a href="${url}" target="_blank"><button>Get Quote →</button></a>`;
+          }
+          else {
+            td.textContent = cell.trim();
+          }
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+
+      // Sorting stays exactly the same
+      document.querySelectorAll('th').forEach((th, i) => {
+        if (i < 10) th.addEventListener('click', () => sortTable(i));
+      });
+    });
+});
+
+function sortTable(col) {
+  const table = document.getElementById('priceTable');
+  let switching = true;
+  while (switching) {
+    switching = false;
+    const rows = table.rows;
+    for (let i = 1; i < (rows.length - 1); i++) {
+      let shouldSwitch = false;
+      const a = rows[i].getElementsByTagName('TD')[col].innerText;
+      const b = rows[i + 1].getElementsByTagName('TD')[col].innerText;
+      if (a.localeCompare(b, undefined, {numeric: true}) > 0) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
