@@ -7,16 +7,35 @@ document.addEventListener('DOMContentLoaded', () => {
       );
       const tbody = document.querySelector('#priceTable tbody');
 
+      // Affiliate links for each company
+      const links = {
+        "Twist": "https://www.twistbioscience.com/order?ref=yourid",
+        "IDT": "https://www.idtdna.com/pages/products/genes",
+        "GenScript": "https://www.genscript.com/gene_synthesis.html",
+        "Eurofins": "https://eurofinsgenomics.com/en/products/gene-synthesis/",
+        "Azenta": "https://www.azenta.com/gene-synthesis",
+        "Synbio Tech": "https://www.synbio-tech.com/gene-synthesis",
+        "Biomatik": "https://www.biomatik.com/gene-synthesis",
+        "Thermo GeneArt": "https://www.thermofisher.com/geneart"
+      };
+
+      // Company names in correct order (columns 1–8)
+      const companies = ["Twist", "IDT", "GenScript", "Eurofins", "Azenta", "Synbio Tech", "Biomatik", "Thermo GeneArt"];
+
       for (let i = 1; i < rows.length; i++) {
         const cells = rows[i];
         const tr = document.createElement('tr');
 
-        // Find cheapest price (columns 1–8)
+        // Extract prices from columns 1–8
         const priceValues = cells.slice(1, 9).map(cell => {
           const match = cell.match(/0?\.(\d+)/);
           return match ? parseFloat('0.' + match[1]) : Infinity;
         });
+
         const minPrice = Math.min(...priceValues);
+        const cheapestIndex = priceValues.indexOf(minPrice); // 0 = Twist, 1 = IDT, etc.
+        const cheapestCompany = companies[cheapestIndex];
+        const cheapest-Link = links[cheapestCompany];
 
         cells.forEach((cell, idx) => {
           const td = document.createElement('td');
@@ -25,11 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
             td.textContent = cell || '—';
             const match = cell.match(/0?\.(\d+)/);
             const num = match ? parseFloat('0.' + match[1]) : Infinity;
-            if (num === minPrice && num !== Infinity) td.classList.add('cheapest');
+            if (num === minPrice && num !== Infinity) {
+              td.classList.add('cheapest');
+            }
           }
           else if (idx === 13) { // Action column
-            td.innerHTML = `<a href="https://www.twistbioscience.com/order?ref=yourid" target="_blank">
-              <button>Get Quote →</button></a>`;
+            td.innerHTML = `
+              <a href="${cheapestLink}" target="_blank">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded whitespace-nowrap">
+                  Get Quote from ${cheapestCompany} →
+                </button>
+              </a>`;
           }
           else {
             td.textContent = cell || '—';
