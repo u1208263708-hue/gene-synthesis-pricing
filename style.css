@@ -44,3 +44,15 @@ button {
     background-color: #d4edda !important;
     font-weight: bold;
 }
+
+
+/* ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←← */
+/*  ONE-LINE FIX THAT ACTUALLY WORKS (copy-paste)  */
+/* ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←← */
+#priceTable td, #priceTable th {
+    white-space: nowrap !important;   /* ← no line wrapping */
+    font-size: 1rem !important;       /* ← original big size */
+    padding: 16px 10px !important;    /* ← original spacious padding */
+}
+
+
