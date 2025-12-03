@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "IDT":            "https://www.idtdna.com/pages/products/genes",
         "GenScript":      "https://www.genscript.com/gene_synthesis.html",
         "Eurofins":       "https://eurofinsgenomics.com/en/products/gene-synthesis/",
-        "Azenta":         "https://www.azenta.com/gene-synthesis",
+        "Azenta":         "https://www.azenta.com/genewiz-multiomics-synthesis",
         "Synbio Tech":    "https://www.synbio-tech.com/gene-synthesis",
         "Biomatik":       "https://www.biomatik.com/gene-synthesis",
         "Thermo GeneArt": "https://www.thermofisher.com/geneart"
