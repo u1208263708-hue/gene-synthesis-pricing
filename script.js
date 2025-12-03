@@ -3,24 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.text())
     .then(text => {
       const rows = text.trim().split('\n').map(line =>
-        line.split(',').map(cell => cell.trim().replace(/^"|"$/g, ''))
+        line.split(',').map(c => c.trim().replace(/^"|"$/g, ''))
       );
 
-      // Use exact header names from your CSV row 0
+      // ---- Map exact column names from your CSV header (row 0) ----
       const header = rows[0];
-      const twistCol     = header.indexOf("Twist");
-      const idtCol       = header.indexOf("IDT");
-      const genscriptCol = header.indexOf("GenScript");
-      const eurofinsCol  = header.indexOf("Eurofins");
-      const azentaCol    = header.indexOf("Azenta");
-      const synbioCol    = header.indexOf("Synbio Tech");
-      const biomatikCol  = header.indexOf("Biomatik");
-      const thermoCol    = header.indexOf("Thermo GeneArt");
+      const companyCols = [
+        header.indexOf("Twist"),
+        header.indexOf("IDT"),
+        header.indexOf("GenScript"),
+        header.indexOf("Eurofins"),
+        header.indexOf("Azenta"),
+        header.indexOf("Synbio Tech"),
+        header.indexOf("Biomatik"),
+        header.indexOf("Thermo GeneArt")
+      ];
 
-      const companyIndices = [twistCol, idtCol, genscriptCol, eurofinsCol, azentaCol, synbioCol, biomatikCol, thermoCol];
-      const companyNames =   ["Twist", "IDT", "GenScript", "Eurofins", "Azenta", "Synbio Tech", "Biomatik", "Thermo GeneArt"];
+      const companyNames = [
+        "Twist", "IDT", "GenScript", "Eurofins",
+        "Azenta", "Synbio Tech", "Biomatik", "Thermo GeneArt"
+      ];
 
-      const links = {
+      const affiliateLinks = {
         "Twist":          "https://www.twistbioscience.com/order?ref=yourid",
         "IDT":            "https://www.idtdna.com/pages/products/genes",
         "GenScript":      "https://www.genscript.com/gene_synthesis.html",
@@ -37,38 +41,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const cells = rows[i];
         const tr = document.createElement('tr');
 
-        // Extract the 8 price values using the correct column indices
-        const priceValues = companyIndices.map(idx => {
-          const cell = cells[idx] || '';
-          const match = cell.match(/0?\.(\d+)/);
+        // ---- Find the cheapest price in this row ----
+        let prices = companyCols.map(colIdx => {
+          const val = cells[colIdx] || '';
+          const match = val.match(/0?\.(\d+)/);
           return match ? parseFloat('0.' + match[1]) : Infinity;
         });
 
-        const minPrice = Math.min(...priceValues);
-        const cheapestIdx = priceValues.indexOf(minPrice);
-        const cheapestCompany = companyNames[cheapestIdx];
-        const cheapestLink = links[cheapestCompany];
+        const minPrice = Math.min(...prices);
+        const cheapestColIndex = prices.indexOf(minPrice);   // 0–7
+        const cheapestCompany = companyNames[cheapestColIndex];
+        const cheapestURL = affiliateLinks[cheapestCompany];
 
         cells.forEach((cell, idx) => {
           const td = document.createElement('td');
 
-          // Highlight cheapest price cell
-          if (companyIndices.includes(idx)) {
+          // Price columns – highlight cheapest
+          if (companyCols.includes(idx)) {
             td.textContent = cell || '—';
             const match = cell.match(/0?\.(\d+)/);
             const num = match ? parseFloat('0.' + match[1]) : Infinity;
-            if (num === minPrice && num !== Infinity) td.classList.add('cheapest');
+            if (num === minPrice && num !== Infinity) {
+              td.classList.add('cheapest');
+            }
           }
-          // Action column – dynamic button to cheapest provider
+          // Action column (index 13 = last column)
           else if (idx === 13) {
             td.innerHTML = `
-              <a href="${cheapestLink}" target="_blank">
-                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg shadow-md transition whitespace-nowrap">
+              <a href="${cheapestURL}" target="_blank">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow transition">
                   Get Quote from ${cheapestCompany} →
                 </button>
               </a>`;
           }
-          // All other columns
+          // Everything else
           else {
             td.textContent = cell || '—';
           }
