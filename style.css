@@ -23,14 +23,16 @@
   text-align: left !important;
   padding: 12px 10px !important;
   font-size: 0.85rem;
-  max-width: 150px;
+  /* FIX: Reduced width to prevent horizontal scroll */
+  max-width: 100px;
 }
 
 /* Action column – compact button */
 #priceTable th:last-child,
 #priceTable td:last-child {
   padding: 6px 4px !important;
-  width: 135px !important;
+  /* FIX: Reduced width to prevent horizontal scroll */
+  width: 110px !important;
 }
 
 #priceTable button {
@@ -48,7 +50,8 @@
 
 /* General cell styling */
 #priceTable th, #priceTable td {
-  padding: 10px 6px !important;
+  /* FIX: Slightly reduced padding for a more compact table */
+  padding: 8px 4px !important;
   text-align: center;
   font-size: 0.9rem;
 }
