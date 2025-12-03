@@ -2,3 +2,23 @@ th, td { padding: 12px 8px; text-align: center; border-bottom: 1px solid #e5e7eb
 tr:hover { background-color: #f8faff; }
 .cheapest { background-color: #d4edda !important; font-weight: bold; }
 button { @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition; }
+
+/* ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←← */
+/*  ONE-LINE FIX: Force single-row cells + smaller text  */
+/*  ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←← */
+#priceTable td, #priceTable th {
+    white-space: nowrap !important;      /* ← prevents wrapping */
+    font-size: 0.875rem !important;      /* ← 14px instead of 16px */
+    padding: 12px 8px !important;        /* ← comfortable breathing room */
+}
+
+/* Optional: make table horizontally scrollable on very small phones */
+.overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Extra polish: slightly smaller buttons on mobile */
+button {
+    font-size: 0.8rem !important;
+    padding: 8px 12px !important;
+}
