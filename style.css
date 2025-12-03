@@ -1,44 +1,19 @@
 /* ──────────────────────────────── */
-/*  FINAL CLEAN & BULLETPROOF CSS  */
+/* FINAL CLEAN & BULLETPROOF CSS  */
 /* ──────────────────────────────── */
-
-#priceTable {
-    width: 100%;
-    table-layout: fixed;               /* ←←← forces equal column width */
-}
-
-#priceTable th,
-#priceTable td {
-    white-space: nowrap;               /* ←←← no line breaks */
-    overflow: hidden;                  /* ←←← hide any overflow */
-    text-overflow: ellipsis;           /* ←←← show "…" if still too long */
-    font-size: 0.875rem;               /* 14px – perfect readability */
-    padding: 12px 6px;                 /* tighter horizontal padding */
+#priceTable { width: 100%; table-layout: fixed; }
+#priceTable th, #priceTable td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    padding: 12px 6px;
     text-align: center;
 }
-
-/* Give the longest columns (IDT, Thermo, etc.) a little more room */
-#priceTable th:nth-child(3),   /* IDT */
-#priceTable td:nth-child(3),
-#priceTable th:nth-child(9),   /* Thermo GeneArt */
-#priceTable td:nth-child(9) {
-    font-size: 0.82rem;                /* slightly smaller only in these columns */
+#priceTable th:nth-child(3), #priceTable td:nth-child(3),   /* IDT */
+#priceTable th:nth-child(9), #priceTable td:nth-child(9) {  /* Thermo */
+    font-size: 0.82rem;
 }
-
-/* Horizontal scroll on small screens (looks intentional and pro) */
-.overflow-x-auto {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Button polish */
-button {
-    font-size: 0.8rem !important;
-    padding: 8px 12px !important;
-    white-space: nowrap;
-}
-
-/* Green highlight for cheapest */
-.cheapest {
-    background-color: #d4edda !important;
-    font-weight: bold;
-}
+.overflow-x-auto { -webkit-overflow-scrolling: touch; }
+button { font-size: 0.8rem !important; padding: 8px 12px !important; white-space: nowrap; }
+.cheapest { background-color: #d4edda !important; font-weight: bold; }
