@@ -52,3 +52,16 @@ button:hover {
 .overflow-x-auto {
   -webkit-overflow-scrolling: touch;
 }
+
+/* FINAL FIX → no more horizontal scroll ever */
+#priceTable td:last-child,
+#priceTable th:last-child {
+  padding: 8px 4px !important;     /* super tight action column */
+  width: 140px !important;        /* forces button to shrink */
+}
+
+#priceTable button {
+  font-size: 0.82rem !important;   /* slightly smaller text */
+  padding: 8px 10px !important;    /* smaller but still beautiful */
+  white-space: nowrap;
+}
