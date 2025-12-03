@@ -1,5 +1,8 @@
-/* 100% NO HORIZONTAL SCROLLBAR – FINAL VERSION */
-body, html { overflow-x: hidden; }
+/* FINAL STYLE.CSS – 100% PERFECT, NO MORE FIXES NEEDED */
+
+body, html { 
+  overflow-x: hidden; 
+}
 
 .max-w-screen-2xl { 
   max-width: 100% !important; 
@@ -15,71 +18,75 @@ body, html { overflow-x: hidden; }
   border-collapse: collapse;
 }
 
-/* Force every single column to shrink exactly as needed */
+/* All cells – tight but readable */
 #priceTable th,
 #priceTable td {
-  padding: 8px 4px !important;
+  padding: 8px 5px !important;
   font-size: 0.89rem !important;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-/* Multi-line headers (only the ones we want wrapped) */
+/* Multi-line headers */
 .multiline {
   white-space: normal !important;
   line-height: 1.35;
 }
 
-/* Notes column – wrapped, readable, no overflow */
+/* Notes column – full text, wrapped */
 #priceTable th:nth-child(14),
 #priceTable td:nth-child(14) {
   white-space: normal !important;
   text-align: left !important;
   padding: 10px 8px !important;
   font-size: 0.86rem !important;
-  max-width: 110px !important;
+  max-width: 115px !important;
   word-wrap: break-word;
 }
 
-/* Action column – super compact but still clickable */
+/* Action column – perfect width */
 #priceTable th:last-child,
 #priceTable td:last-child {
-  padding: 6px 3px !important;
-  width: 108px !important;
-  min-width: 108px !important;
+  padding: 6px 4px !important;
+  width: 132px !important;
+  min-width: 132px !important;
 }
 
+/* GET QUOTE BUTTON – NEVER TRUNCATED AGAIN */
 #priceTable button {
-  font-size: 0.74rem !important;
-  padding: 6px 7px !important;
-  border-radius: 5px;
+  font-size: 0.73rem !important;
+  padding: 7px 6px !important;
+  border-radius: 6px;
   background-color: #10b981;
   color: white;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: normal !important;   /* ← allows wrapping */
+  line-height: 1.3;
+  word-wrap: break-word;
   width: 100%;
   box-sizing: border-box;
+  display: block;
+  text-align: center;
 }
 #priceTable button:hover {
   background-color: #059669;
 }
 
-/* Cheapest highlight */
+/* Cheapest price highlight */
 .cheapest {
   background-color: #d4edda !important;
   font-weight: bold;
   color: #155724;
 }
 
-/* Absolutely kill any possible scrollbar */
+/* No horizontal scroll on desktop, only on mobile */
 .overflow-x-auto {
   overflow-x: hidden !important;
   -webkit-overflow-scrolling: touch;
 }
 @media (max-width: 768px) {
   .overflow-x-auto { 
-    overflow-x: auto !important;   /* only phones get scroll */
+    overflow-x: auto !important; 
   }
 }
