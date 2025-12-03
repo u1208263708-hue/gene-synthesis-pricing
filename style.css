@@ -1,31 +1,58 @@
-/* Fit perfectly on one screen – no horizontal scroll on desktop */
+/* MAXIMUM WIDTH + NO HORIZONTAL SCROLL */
+.max-w-screen-2xl { max-width: 100% !important; padding: 0 1rem; }
+@media (min-width: 1536px) { .max-w-screen-2xl { padding: 0 3rem; } }
+
+/* Force table to fit perfectly */
 #priceTable {
   table-layout: fixed;
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-/* Multi-line centered headers */
+/* Multi-line headers */
 .multiline {
   white-space: normal !important;
   line-height: 1.4;
-  padding: 12px 6px !important;
-  font-size: 0.875rem;
 }
 
-/* General header style */
-#priceTable th {
-  padding: 14px 8px !important;
-  font-size: 0.95rem;
-  font-weight: 600;
+/* Notes column – full text, wrapped */
+#priceTable th:nth-child(14),
+#priceTable td:nth-child(14) {
+  white-space: normal !important;
+  text-align: left !important;
+  padding: 12px 10px !important;
+  font-size: 0.85rem;
+  max-width: 150px;
 }
 
-/* Cell style – tight but readable */
-#priceTable td {
-  padding: 12px 6px !important;
-  text-align: center;
-  font-size: 0.95rem;
+/* Action column – compact button */
+#priceTable th:last-child,
+#priceTable td:last-child {
+  padding: 6px 4px !important;
+  width: 135px !important;
+}
+
+#priceTable button {
+  font-size: 0.78rem !important;
+  padding: 7px 9px !important;
+  border-radius: 6px;
   white-space: nowrap;
+  background-color: #10b981;
+  color: white;
+  font-weight: bold;
 }
+#priceTable button:hover {
+  background-color: #059669;
+}
+
+/* General cell styling */
+#priceTable th, #priceTable td {
+  padding: 10px 6px !important;
+  text-align: center;
+  font-size: 0.9rem;
+}
+#priceTable th { font-weight: 600; }
 
 /* Cheapest highlight */
 .cheapest {
@@ -34,44 +61,5 @@
   color: #155724;
 }
 
-/* Action button */
-button {
-  background-color: #10b981;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.2s;
-}
-button:hover {
-  background-color: #059669;
-  transform: translateY(-1px);
-}
-
-/* Smooth scroll on mobile only */
-.overflow-x-auto {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* FINAL FIX → no more horizontal scroll ever */
-#priceTable td:last-child,
-#priceTable th:last-child {
-  padding: 8px 4px !important;     /* super tight action column */
-  width: 140px !important;        /* forces button to shrink */
-}
-
-#priceTable button {
-  font-size: 0.82rem !important;   /* slightly smaller text */
-  padding: 8px 10px !important;    /* smaller but still beautiful */
-  white-space: nowrap;
-}
-
-/* Fix Notes column — show full text, no truncation */
-#priceTable th:nth-child(14),   /* "Notes" header */
-#priceTable td:nth-child(14) {   /* "Notes" cells */
-    white-space: normal !important;   /* allow wrapping */
-    text-align: left !important;
-    padding: 12px 10px !important;
-    font-size: 0.9rem !important;
-    max-width: 140px !important;
-}
+/* Mobile smoothness */
+.overflow-x-auto { -webkit-overflow-scrolling: touch; }
