@@ -5,57 +5,70 @@ document.addEventListener('DOMContentLoaded', () => {
       const rows = text.trim().split('\n').map(line =>
         line.split(',').map(cell => cell.trim().replace(/^"|"$/g, ''))
       );
-      const tbody = document.querySelector('#priceTable tbody');
 
-      // Affiliate links for each company
+      // Use exact header names from your CSV row 0
+      const header = rows[0];
+      const twistCol     = header.indexOf("Twist");
+      const idtCol       = header.indexOf("IDT");
+      const genscriptCol = header.indexOf("GenScript");
+      const eurofinsCol  = header.indexOf("Eurofins");
+      const azentaCol    = header.indexOf("Azenta");
+      const synbioCol    = header.indexOf("Synbio Tech");
+      const biomatikCol  = header.indexOf("Biomatik");
+      const thermoCol    = header.indexOf("Thermo GeneArt");
+
+      const companyIndices = [twistCol, idtCol, genscriptCol, eurofinsCol, azentaCol, synbioCol, biomatikCol, thermoCol];
+      const companyNames =   ["Twist", "IDT", "GenScript", "Eurofins", "Azenta", "Synbio Tech", "Biomatik", "Thermo GeneArt"];
+
       const links = {
-        "Twist": "https://www.twistbioscience.com/order?ref=yourid",
-        "IDT": "https://www.idtdna.com/pages/products/genes",
-        "GenScript": "https://www.genscript.com/gene_synthesis.html",
-        "Eurofins": "https://eurofinsgenomics.com/en/products/gene-synthesis/",
-        "Azenta": "https://www.azenta.com/gene-synthesis",
-        "Synbio Tech": "https://www.synbio-tech.com/gene-synthesis",
-        "Biomatik": "https://www.biomatik.com/gene-synthesis",
+        "Twist":          "https://www.twistbioscience.com/order?ref=yourid",
+        "IDT":            "https://www.idtdna.com/pages/products/genes",
+        "GenScript":      "https://www.genscript.com/gene_synthesis.html",
+        "Eurofins":       "https://eurofinsgenomics.com/en/products/gene-synthesis/",
+        "Azenta":         "https://www.azenta.com/gene-synthesis",
+        "Synbio Tech":    "https://www.synbio-tech.com/gene-synthesis",
+        "Biomatik":       "https://www.biomatik.com/gene-synthesis",
         "Thermo GeneArt": "https://www.thermofisher.com/geneart"
       };
 
-      // Company names in correct order (columns 1–8)
-      const companies = ["Twist", "IDT", "GenScript", "Eurofins", "Azenta", "Synbio Tech", "Biomatik", "Thermo GeneArt"];
+      const tbody = document.querySelector('#priceTable tbody');
 
       for (let i = 1; i < rows.length; i++) {
         const cells = rows[i];
         const tr = document.createElement('tr');
 
-        // Extract prices from columns 1–8
-        const priceValues = cells.slice(1, 9).map(cell => {
+        // Extract the 8 price values using the correct column indices
+        const priceValues = companyIndices.map(idx => {
+          const cell = cells[idx] || '';
           const match = cell.match(/0?\.(\d+)/);
           return match ? parseFloat('0.' + match[1]) : Infinity;
         });
 
         const minPrice = Math.min(...priceValues);
-        const cheapestIndex = priceValues.indexOf(minPrice); // 0 = Twist, 1 = IDT, etc.
-        const cheapestCompany = companies[cheapestIndex];
-        const cheapest-Link = links[cheapestCompany];
+        const cheapestIdx = priceValues.indexOf(minPrice);
+        const cheapestCompany = companyNames[cheapestIdx];
+        const cheapestLink = links[cheapestCompany];
 
         cells.forEach((cell, idx) => {
           const td = document.createElement('td');
 
-          if (idx >= 1 && idx <= 8) {
+          // Highlight cheapest price cell
+          if (companyIndices.includes(idx)) {
             td.textContent = cell || '—';
             const match = cell.match(/0?\.(\d+)/);
             const num = match ? parseFloat('0.' + match[1]) : Infinity;
-            if (num === minPrice && num !== Infinity) {
-              td.classList.add('cheapest');
-            }
+            if (num === minPrice && num !== Infinity) td.classList.add('cheapest');
           }
-          else if (idx === 13) { // Action column
+          // Action column – dynamic button to cheapest provider
+          else if (idx === 13) {
             td.innerHTML = `
               <a href="${cheapestLink}" target="_blank">
-                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded whitespace-nowrap">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-lg shadow-md transition whitespace-nowrap">
                   Get Quote from ${cheapestCompany} →
                 </button>
               </a>`;
           }
+          // All other columns
           else {
             td.textContent = cell || '—';
           }
