@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cells = rows[i];
         const tr = document.createElement('tr');
 
+        // Calculate prices and find the cheapest
         const prices = colIdx.map(idx => {
           const m = (cells[idx] || '').match(/0?\.(\d+)/);
           return m ? parseFloat('0.' + m[1]) : Infinity;
@@ -34,13 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cells.forEach((cell, idx) => {
           const td = document.createElement('td');
+          // Price columns
           if (colIdx.includes(idx)) {
             td.textContent = cell || '—';
+            // Check for cheapest price
             if (parseFloat('0.' + (cell.match(/0?\.(\d+)/)||[])[1]) === minP) td.classList.add('cheapest');
           }
+          // Action column (Last column: cells.length - 1)
           else if (idx === cells.length - 1) {
             td.innerHTML = `<a href="${url}" target="_blank"><button>Get Quote from ${winner} →</button></a>`;
           }
+          // All other columns (Notes included)
           else {
             td.textContent = cell || '—';
           }
