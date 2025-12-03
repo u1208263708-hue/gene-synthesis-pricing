@@ -21,7 +21,7 @@
 #priceTable td:nth-child(14) {
   white-space: normal !important;
   text-align: left !important;
-  /* FIX: Reduced padding for the Notes column */
+  /* Reduced padding for the Notes column */
   padding: 8px 8px !important; 
   font-size: 0.85rem;
   /* Reduced width for space optimization */
@@ -32,8 +32,8 @@
 #priceTable th:last-child,
 #priceTable td:last-child {
   padding: 6px 4px !important;
-  /* Reduced width for space optimization */
-  width: 110px !important;
+  /* Reduced width for maximum compactness */
+  width: 100px !important;
 }
 
 #priceTable button {
@@ -51,8 +51,8 @@
 
 /* General cell styling */
 #priceTable th, #priceTable td {
-  /* FIX: Reduced vertical padding to make table more compact */
-  padding: 6px 4px !important; 
+  /* FIX: Reduced vertical (6px) and horizontal (2px) padding to tighten the table */
+  padding: 6px 2px !important; 
   text-align: center;
   font-size: 0.9rem;
 }
