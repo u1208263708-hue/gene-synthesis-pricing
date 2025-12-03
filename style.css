@@ -1,64 +1,70 @@
-/* MAXIMUM WIDTH + NO HORIZONTAL SCROLL */
-.max-w-screen-2xl { max-width: 100% !important; padding: 0 1rem; }
-@media (min-width: 1536px) { .max-w-screen-2xl { padding: 0 3rem; } }
+/* 100% NO HORIZONTAL SCROLLBAR – FINAL VERSION */
+body, html { overflow-x: hidden; }
 
-/* Force table to fit perfectly */
+.max-w-screen-2xl { 
+  max-width: 100% !important; 
+  padding: 0 0.5rem; 
+}
+@media (min-width: 1536px) { 
+  .max-w-screen-2xl { padding: 0 2rem; } 
+}
+
 #priceTable {
   table-layout: fixed;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  width: 100% !important;
+  border-collapse: collapse;
 }
 
-/* Multi-line headers */
+/* Force every single column to shrink exactly as needed */
+#priceTable th,
+#priceTable td {
+  padding: 8px 4px !important;
+  font-size: 0.89rem !important;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Multi-line headers (only the ones we want wrapped) */
 .multiline {
   white-space: normal !important;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
-/* Notes column – full text, wrapped */
+/* Notes column – wrapped, readable, no overflow */
 #priceTable th:nth-child(14),
 #priceTable td:nth-child(14) {
   white-space: normal !important;
   text-align: left !important;
-  /* Reduced padding for the Notes column */
-  padding: 8px 8px !important; 
-  /* FIX: Increased font size for better legibility */
-  font-size: 0.9rem; /* Was 0.85rem */
-  /* Reduced width for space optimization */
-  max-width: 100px;
+  padding: 10px 8px !important;
+  font-size: 0.86rem !important;
+  max-width: 110px !important;
+  word-wrap: break-word;
 }
 
-/* Action column – compact button */
+/* Action column – super compact but still clickable */
 #priceTable th:last-child,
 #priceTable td:last-child {
-  padding: 6px 4px !important;
-  /* Reduced width for maximum compactness */
-  width: 100px !important;
+  padding: 6px 3px !important;
+  width: 108px !important;
+  min-width: 108px !important;
 }
 
 #priceTable button {
-  font-size: 0.78rem !important;
-  padding: 7px 9px !important;
-  border-radius: 6px;
-  white-space: nowrap;
+  font-size: 0.74rem !important;
+  padding: 6px 7px !important;
+  border-radius: 5px;
   background-color: #10b981;
   color: white;
   font-weight: bold;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 #priceTable button:hover {
   background-color: #059669;
 }
-
-/* General cell styling */
-#priceTable th, #priceTable td {
-  /* FIX: Reduced horizontal padding to 1px to eliminate white space and scrollbar */
-  padding: 6px 1px !important; 
-  text-align: center;
-  /* FIX: Increased font size for better legibility */
-  font-size: 0.95rem; /* Was 0.9rem */
-}
-#priceTable th { font-weight: 600; }
 
 /* Cheapest highlight */
 .cheapest {
@@ -67,6 +73,13 @@
   color: #155724;
 }
 
-/* Mobile smoothness */
-/* Note: This is now the ONLY place where a scrollbar should appear (on phones/small devices) */
-.overflow-x-auto { -webkit-overflow-scrolling: touch; }
+/* Absolutely kill any possible scrollbar */
+.overflow-x-auto {
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 768px) {
+  .overflow-x-auto { 
+    overflow-x: auto !important;   /* only phones get scroll */
+  }
+}
