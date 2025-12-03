@@ -1,0 +1,6 @@
+Length Range (bp),Twist Bioscience,IDT,GenScript,Eurofins,Azenta,Synbio Tech,Biomatik,Thermo GeneArt,Turnaround (days),Codon Opt Included?,Cloning Included?,Academic Discount?,Notes
+300-500,$0.09/bp,$0.35/bp,$0.29/bp,$0.32/bp,$0.40/bp,$0.25/bp,$0.28/bp,$0.35/bp,5-10,Yes,No,10%,Free verification
+501-1000,$0.08/bp,$0.30/bp,$0.25/bp,$0.28/bp,$0.35/bp,$0.22/bp,$0.24/bp,$0.32/bp,5-10,Yes,Yes,10%,gBlocks option
+1001-2000,$0.07/bp,$0.29/bp,$0.22/bp,$0.25/bp,$0.32/bp,$0.20/bp,$0.21/bp,$0.30/bp,7-15,Yes,Yes,15%,FLASH tier
+2001-3000,$0.07/bp,$0.35/bp,$0.25/bp,$0.28/bp,$0.35/bp,$0.22/bp,$0.24/bp,$0.35/bp,10-20,Yes,Yes,15%,Express add-on
+3001-5000,$0.09/bp,$0.40/bp,$0.30/bp,$0.35/bp,$0.40/bp,$0.28/bp,$0.30/bp,$0.40/bp,10-20,Yes,Yes,20%,High GC handling

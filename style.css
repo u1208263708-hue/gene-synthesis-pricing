@@ -1,0 +1,4 @@
+th, td { padding: 12px 8px; text-align: center; border-bottom: 1px solid #e5e7eb; }
+tr:hover { background-color: #f8faff; }
+.cheapest { background-color: #d4edda !important; font-weight: bold; }
+button { @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition; }
