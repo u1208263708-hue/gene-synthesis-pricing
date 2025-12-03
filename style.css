@@ -1,43 +1,45 @@
 /* ──────────────────────────────── */
-/*  FINAL CLEAN & BULLETPROOF CSS  */
+/*  FINAL: BIG TEXT + NO LINE WRAP */
 /* ──────────────────────────────── */
 
 #priceTable {
     width: 100%;
-    table-layout: fixed;               /* ←←← forces equal column width */
+    table-layout: fixed;           /* forces columns to respect width */
 }
 
 #priceTable th,
 #priceTable td {
-    white-space: nowrap;               /* ←←← no line breaks */
-    overflow: hidden;                  /* ←←← hide any overflow */
-    text-overflow: ellipsis;           /* ←←← show "…" if still too long */
-    font-size: 0.875rem;               /* 14px – perfect readability */
-    padding: 12px 6px;                 /* tighter horizontal padding */
+    white-space: nowrap;           /* ←←← THIS is the magic line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;               /* ←←← back to original 16px size */
+    padding: 14px 8px;             /* generous padding, looks premium */
     text-align: center;
 }
 
-/* Give the longest columns (IDT, Thermo, etc.) a little more room */
+/* Give the three longest columns a tiny bit more width */
 #priceTable th:nth-child(3),   /* IDT */
 #priceTable td:nth-child(3),
 #priceTable th:nth-child(9),   /* Thermo GeneArt */
-#priceTable td:nth-child(9) {
-    font-size: 0.82rem;                /* slightly smaller only in these columns */
+#priceTable td:nth-child(9),
+#priceTable th:nth-child(10),  /* Action column */
+#priceTable td:nth-child(10) {
+    width: 14%;                    /* slightly wider for long text/buttons */
 }
 
-/* Horizontal scroll on small screens (looks intentional and pro) */
+/* Make sure the table container scrolls horizontally on small screens */
 .overflow-x-auto {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Button polish */
+/* Button stays crisp */
 button {
-    font-size: 0.8rem !important;
-    padding: 8px 12px !important;
+    font-size: 0.9rem;
+    padding: 10px 14px;
     white-space: nowrap;
 }
 
-/* Green highlight for cheapest */
+/* Cheapest price highlight */
 .cheapest {
     background-color: #d4edda !important;
     font-weight: bold;
