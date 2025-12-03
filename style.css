@@ -23,7 +23,8 @@
   text-align: left !important;
   /* Reduced padding for the Notes column */
   padding: 8px 8px !important; 
-  font-size: 0.85rem;
+  /* FIX: Increased font size for better legibility */
+  font-size: 0.9rem; /* Was 0.85rem */
   /* Reduced width for space optimization */
   max-width: 100px;
 }
@@ -51,10 +52,11 @@
 
 /* General cell styling */
 #priceTable th, #priceTable td {
-  /* FIX: Reduced vertical (6px) and horizontal (2px) padding to tighten the table */
-  padding: 6px 2px !important; 
+  /* FIX: Reduced horizontal padding to 1px to eliminate white space and scrollbar */
+  padding: 6px 1px !important; 
   text-align: center;
-  font-size: 0.9rem;
+  /* FIX: Increased font size for better legibility */
+  font-size: 0.95rem; /* Was 0.9rem */
 }
 #priceTable th { font-weight: 600; }
 
@@ -66,4 +68,5 @@
 }
 
 /* Mobile smoothness */
+/* Note: This is now the ONLY place where a scrollbar should appear (on phones/small devices) */
 .overflow-x-auto { -webkit-overflow-scrolling: touch; }
